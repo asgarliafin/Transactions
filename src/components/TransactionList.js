@@ -5,6 +5,7 @@ const TransactionList = ({ transactions }) => {
     <div>
       <h2>Transaction List</h2>
       <ul>
+        
         {transactions.map((transaction) => (
           <li key={transaction.id}>
             Transaction ID: {transaction.id}, Amount: ${transaction.amount}
