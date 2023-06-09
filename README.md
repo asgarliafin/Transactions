@@ -12,7 +12,7 @@ Node.js: You can download and install it from https://nodejs.org.
 Installation
 
 1. Clone the project repository:
-git clone https://github.com/your-username/Transaction-List.git
+git clone https://github.com/asgarliafin/Transactions
 
 2. Navigate to the project directory:
 cd Transaction-List
