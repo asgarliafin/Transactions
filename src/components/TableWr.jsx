@@ -1,9 +1,8 @@
+import React from 'react';
 import { makeStyles } from '@mui/styles';
-import * as React from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import Paper from '@mui/material/Paper';
-import { calculateRewardPoints } from '../utils/pointCalculator';
-
+import { calculateTotalRewardPoints, calculateMonthlyRewardPoints } from '../utils/pointCalculator';
 
 const useStyles = makeStyles({
   table: {
@@ -11,9 +10,28 @@ const useStyles = makeStyles({
   },
 });
 
-
-const TransactionTable = ({transaction}) => {
+const TransactionTable = ({ transaction }) => {
   const classes = useStyles();
+
+  const renderMonthlyRewardPoints = (item) => {
+    return (
+      <>
+        {item.join(', ')} : <b>{calculateMonthlyRewardPoints(item)}</b>
+      </>
+    );
+  };
+
+  const renderTransactionRows = () => {
+    return transaction.map((elm, i) => (
+      <TableRow key={i}>
+        <TableCell>{i + 1}</TableCell>
+        {Object.values(elm).map(item => (
+          <TableCell key={item}>{renderMonthlyRewardPoints(item)}</TableCell>
+        ))}
+        <TableCell>{calculateTotalRewardPoints(elm)}</TableCell>
+      </TableRow>
+    ));
+  };
 
   return (
     <TableContainer component={Paper}>
@@ -21,18 +39,14 @@ const TransactionTable = ({transaction}) => {
         <TableHead>
           <TableRow>
             <TableCell>Transaction ID</TableCell>
-            <TableCell>Amount</TableCell>
+            <TableCell>Month 1</TableCell>
+            <TableCell>Month 2</TableCell>
+            <TableCell>Month 3</TableCell>
             <TableCell>Earned Points</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {transaction.map(({id, amount}) => (
-            <TableRow key={id}>
-              <TableCell>{id}</TableCell>
-              <TableCell>${amount}</TableCell>
-              <TableCell>{calculateRewardPoints(amount)}</TableCell>
-            </TableRow>
-          ))}
+          {renderTransactionRows()}
         </TableBody>
       </Table>
     </TableContainer>
