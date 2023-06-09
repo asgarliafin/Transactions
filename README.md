@@ -18,7 +18,7 @@ git clone https://github.com/asgarliafin/Transactions
 cd Transaction-List
 
 3. Install the project dependencies:
-npm install
+npm install --force or --legacy-peer-deps
 This command will install the required dependencies such as React.js, Material UI, and SCSS.
 
 4. Run the project:
